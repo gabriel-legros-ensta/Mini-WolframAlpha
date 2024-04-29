@@ -62,7 +62,7 @@ while(!IsEmptyTokenQueue(&queue)){
 		AppendTokenQueue(&tot, token1);
 		break;
 	case SUB:
-		token1.value=token1.value-token2.value;
+		token1.value=token2.value-token1.value;
 		AppendTokenQueue(&tot, token1);
 		break;
 	case MUL:
