@@ -79,9 +79,7 @@ while(!IsEmptyTokenQueue(&queue)){
 		break;
 	}}}
 	k=k+1;}
-	printf("yes\n");
 	Token tokenresult=PopTokenQueue(&tot);
-	printf("yes\n");
 	return tokenresult.value;
 	}
 int main(){
