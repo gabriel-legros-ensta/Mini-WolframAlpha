@@ -5,7 +5,7 @@
 
 TokenQueue syntax_analysis(TokenQueue *queue){
     TokenStack operation = CreateTokenStack();
-TokenQueue queue2;
+TokenQueue queue2=CreateTokenQueue();
     while (!IsEmptyTokenQueue(queue)) {
         Token token = PopTokenQueue(queue);
         
