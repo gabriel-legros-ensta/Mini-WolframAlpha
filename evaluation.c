@@ -2,6 +2,8 @@
 #include<ctype.h>
 #include"utils.h"
 #include<stdlib.h>
+//#include"syntax_analysis.h"
+//#include"lexical.h"
 
 
 /*    J'utilise un algorithme basé sur une pile
@@ -15,13 +17,13 @@ Une fois tous les éléments de l'expression traités, la pile ne contient qu'un
 double evaluation (TokenQueue queue){
 
 TokenQueue nombre=CreateTokenQueue();
-TokenQueue tot=CreateTokenQueue();
+
 int k=0;
 while(!IsEmptyTokenQueue(&queue)){
 	Token token =PopTokenQueue(&queue);
 	if(token.type==NUMBER){AppendTokenQueue(&nombre, token);}
 	else{
-		if(IsEmptyTokenQueue(&tot)){
+			
 			ReverseTokenQueue(&nombre);
 			Token token1=PopTokenQueue(&nombre);
 			Token token2=PopTokenQueue(&nombre);
@@ -29,60 +31,61 @@ while(!IsEmptyTokenQueue(&queue)){
 	switch(token.type){
 	case ADD:
 		token1.value=token1.value+token2.value;
-		AppendTokenQueue(&tot, token1);
+		
+		AppendTokenQueue(&nombre, token1);
+		
 		break;
 	case SUB:
 		token1.value=token2.value-token1.value;
-		AppendTokenQueue(&tot, token1);
+		
+		AppendTokenQueue(&nombre, token1);
+		
 		break;
 	case MUL:
 		token1.value=token1.value*token2.value;
-		AppendTokenQueue(&tot, token1);
+		
+		AppendTokenQueue(&nombre, token1);
+		
 		break;
 	case DIV:
-		token1.value=token1.value/token2.value;
-		AppendTokenQueue(&tot, token1);
+		token1.value=token2.value/token1.value;
+		
+		AppendTokenQueue(&nombre, token1);
+		
 		break;
 	case MOD:
-		token1.value=token1.value % token2.value;
-		AppendTokenQueue(&tot, token1);
-		break;}}
+		token1.value=token2.value % token1.value ;
 		
+		AppendTokenQueue(&nombre, token1);
 		
-		
-		
-		
-		else{
-			
-			Token token1=PopTokenQueue(&tot);
-			Token token2=PopTokenQueue(&nombre);
-	switch(token.type){
-	case ADD:
-		token1.value=token1.value+token2.value;
-		AppendTokenQueue(&tot, token1);
 		break;
-	case SUB:
-		token1.value=token2.value-token1.value;
-		AppendTokenQueue(&tot, token1);
-		break;
-	case MUL:
-		token1.value=token1.value*token2.value;
-		AppendTokenQueue(&tot, token1);
-		break;
-	case DIV:
-		token1.value=token1.value/token2.value;
-		AppendTokenQueue(&tot, token1);
-		break;
-	case MOD:
-		token1.value=(token1.value)%(token2.value);
-		AppendTokenQueue(&tot, token1);
-		break;
-	}}}
+	}}
 	k=k+1;}
-	Token tokenresult=PopTokenQueue(&tot);
+	
+	Token tokenresult=PopTokenQueue(&nombre);
+	
 	return tokenresult.value;
 	}
 int main(){
+
+
+
+
+char chaine[100];
+/*fgets(chaine,sizeof(chaine), stdin);
+
+TokenQueue AD=lexical(chaine);
+
+
+ TokenQueue queue=syntax_analysis(&AD);
+ PrintTokenQueue(&queue);*/
+ //exemple ayant permis de vérifier toutes les fonction simultanément 
+
+
+
+
+
+
     
     Token token1 = {NUMBER, 5};
     Token token2 = {ADD, 0};
