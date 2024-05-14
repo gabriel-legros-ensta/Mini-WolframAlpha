@@ -42,11 +42,12 @@ while(chaine[i]!='\0') {
 		
 			//for(int y=0;y<k-l;y++){j=j+(chaine[i+y-k-1]-48)*puissance(k-l-y-1);}
 			
-				//for(int y=0;y<l-1;y++){
-				//float f=chaine[i+y-l+2]-48;
-				//j=j+f/(puissance(1+y));}
-				//token1.value=token1.value+j;
-				//token1.type=NUMBER;
+				for(int y=0;y<l-1;y++){
+				float f=chaine[i+y-l+2]-48;
+				j=j+f/(puissance(1+y));
+				printf("%f\n",j);}
+				token1.value=token1.value+j;
+				token1.type=NUMBER;
 				AppendTokenQueue(&queue, token1);
 				break;}}
 		
@@ -68,9 +69,9 @@ while(chaine[i]!='\0') {
 			
 				float j=0;
 				for(int y=0;y<k;y++){j=j+(chaine[i+y-k+1]-48)*puissance(k-y-1);
-							printf("%f\n",j);}
+							/*printf("%f\n",j)*/;}
 						token1.value=j;
-						printf("nombre %f\n",j);
+						//printf("nombre %f\n",j);
 						token1.type=NUMBER;
 						AppendTokenQueue(&queue, token1);
 					}
@@ -80,16 +81,19 @@ while(chaine[i]!='\0') {
 		
 	else if(chaine[i]=='.' ){l=l+1;
 		float j=0;
-		for(int y=0;y<k;y++){j=j+(chaine[i+y-k]-48)*puissance(k-y-1);}
+		for(int y=0;y<k;y++){j=j+(chaine[i-k+y]-48)*puissance(k-y-1);
+					printf("%f\n",(chaine[i-k+y]-48)*puissance(k-y-1));
+					printf("%f\n",j);}
 		//k=0;
 		token1.value=j;
+		printf("%f\n",j);
 		token1.type=NUMBER;
 	
 	}
 	
 	else {	
 	
-	if (chaine[i] == ' '){ }
+	if (chaine[i] == ' '){}
 		
 	else{
 		
@@ -179,18 +183,18 @@ while(chaine[i]!='\0') {
 return queue;
 }
 
-int main(){
+int main(int argc,char** argv){
+
 //float x=1+0.1;
-char chaine1[100];
-//char chaine[]   /*malloc(sizeof(char)*200)*/;
-fgets(chaine1,sizeof(chaine1), stdin);
+//printf("%s \n", argv[0]);
+//printf("%s \n", argv[1]);
+
+//char chaine[5];
+
+//fgets(argv[1],sizeof(argv[1]), stdin);
 //printf("yg %f, %f\n",x ,puissance(1));
-int t=strlen(chaine1);
-char *chaine = (char *)malloc((t + 1) 
-* sizeof(char));
-strcpy(chaine,chaine1);
-TokenQueue AD=lexical(chaine);
-printf("%s\n", chaine);
+TokenQueue AD=lexical(argv[1]);
+//printf(" la chaine reçue est %s\n", chaine);
 PrintTokenQueue(&AD);
 //free(chaine);
 }
