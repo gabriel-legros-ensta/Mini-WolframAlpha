@@ -45,8 +45,9 @@ while(chaine[i]!='\0') {
 				for(int y=0;y<l-1;y++){
 				float f=chaine[i+y-l+2]-48;
 				j=j+f/(puissance(1+y));
-				printf("%f\n",j);}
-				token1.value=token1.value+j;
+				//token1.value=token1.value+j;
+				printf("%f\n",token1.value);}
+				token1.value+=j;
 				token1.type=NUMBER;
 				AppendTokenQueue(&queue, token1);
 				break;}}
@@ -185,18 +186,11 @@ return queue;
 
 int main(int argc,char** argv){
 
-//float x=1+0.1;
-//printf("%s \n", argv[0]);
-//printf("%s \n", argv[1]);
 
-//char chaine[5];
-
-//fgets(argv[1],sizeof(argv[1]), stdin);
-//printf("yg %f, %f\n",x ,puissance(1));
 TokenQueue AD=lexical(argv[1]);
-//printf(" la chaine reçue est %s\n", chaine);
+
 PrintTokenQueue(&AD);
-//free(chaine);
+
 }
 
 
