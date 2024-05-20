@@ -1,14 +1,14 @@
 CC=gcc
-CFLAGS=-Wall -Werror -I$(HOME)/Documents
+CFLAGS=-Wall -Werror 
 
 
 all:main.x
 
 main.x: utils.o lexical.o syntax_analysis.o evaluation.o 
-	$(CC) -o $@ $^ 
+	$(CC) -o $@ $^ `pkg-config --cflags --libs gtk+-3.0` -lm
 
 %.o: %.c
-	$(CC) $(CFLAGS) -c $< -o $@
+	$(CC)  -I$(HOME)/Documents -c $< -o $@ `pkg-config --cflags --libs gtk+-3.0` -lm
 
 
 clean:
@@ -17,3 +17,8 @@ clean:
 
 realclean: clean
 	rm -f *.x
+	
+	
+	
+	
+
