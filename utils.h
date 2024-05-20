@@ -1,7 +1,7 @@
 #ifndef MINIWOLFRAM_UTILS_H
 #define MINIWOLFRAM_UTILS_H
 
-#define MAX_TOKENS 100
+#define MAX_TOKENS 274
 
 typedef enum {
     NUMBER = 0,
@@ -12,17 +12,52 @@ typedef enum {
     MOD,
     LEFT_PAREN,
     RIGHT_PAREN,
+    POW,
+    SIN,
+    COS,
+    EXP,
+    PI,
+    E,
+    TAN,
+    LOG,
+    MAT,
+    V,
+    PV,
+    INTEGRAL,
+    VAR,
+    FTGAM,
+    GAM,
+    ZET,
+    CONJU,
+    EQUAL,
+    SOLV,
+    ASS,
+    
+    
 } TokenType;
 
 typedef struct {
     TokenType type;
-    int value;
+    double value;
+    char name;
+    char* name2;
+    char* name3;
+    char* name4;
+    char* name5;
+    double coeff;
+    double coeff2;
+    double coeff3;
+    double coeff4;
+    double coeff5;
+    double estim;
 } Token;
+
 
 typedef struct {
     Token tokens[MAX_TOKENS];
     int length;
 } TokenQueue;
+
 
 typedef struct {
     Token tokens[MAX_TOKENS];
@@ -43,6 +78,8 @@ int IsEmptyTokenQueue(TokenQueue *array);
 void ReverseTokenQueue(TokenQueue *array);
 // Print the token array
 void PrintTokenQueue(TokenQueue *tokens);
+// Print tht token like matrix
+void PrintTokenQueueMat(TokenQueue *tokens);
 
 // Create an empty token stack
 TokenStack CreateTokenStack(void);
