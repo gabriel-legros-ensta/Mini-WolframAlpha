@@ -1389,7 +1389,7 @@ static void on_activate(GtkApplication *app, gpointer user_data) {
     GtkWidget *delete_button;
 
     window = gtk_application_window_new(app);
-    gtk_window_set_title(GTK_WINDOW(window), "Calculatrice Scientifique GTK");
+    gtk_window_set_title(GTK_WINDOW(window), "Calculatrice Scientifique pour TurtleSmoke");
     gtk_window_set_default_size(GTK_WINDOW(window), 500, 700);
 
     grid = gtk_grid_new();
