@@ -2,6 +2,7 @@
 #include<ctype.h>
 #include"utils.h"
 #include<stdlib.h>
+#include"lexical.h"
 
 TokenQueue syntax_analysis(TokenQueue *queue){
     TokenStack operation = CreateTokenStack();
@@ -16,11 +17,67 @@ TokenQueue queue2=CreateTokenQueue();
                 AppendTokenQueue(&queue2,token);
 		// on ajoute le token à la queue si c'est un nombre
                 break;
+            case SIN:
+            	PushTokenStack(&operation,token);
+            	break;
+            case COS:
+            	PushTokenStack(&operation,token);
+            	break;
+            case EXP:
+            	PushTokenStack(&operation,token);
+            	break;
+            case PI:
+            	AppendTokenQueue(&queue2,token);
+            	break;
+            case E:
+            	AppendTokenQueue(&queue2,token);
+            	break;
+            case TAN:
+            	PushTokenStack(&operation,token);
+            	break;
+            case LOG:
+            	PushTokenStack(&operation,token);
+            	break;
+            case CONJU:
+            	PushTokenStack(&operation,token);
+            	break;
+            case MAT:
+            	PushTokenStack(&operation,token);
+            	break;
+            case PV:
+            	while(PeekTokenStack(&operation).type!=LEFT_PAREN){
+            	AppendTokenQueue(&queue2, PopTokenStack(&operation));
+            	}
+            
+            	break;
+            case INTEGRAL:
+            	PushTokenStack(&operation,token);
+            	break;
+            case SOLV:
+            	PushTokenStack(&operation,token);
+            	break;
+            case ASS:
+            	PushTokenStack(&operation,token);
+            	break;
+            case FTGAM:
+            	PushTokenStack(&operation,token);
+            	break;
+            case ZET:
+            	PushTokenStack(&operation,token);
+            	break;
+            case GAM:
+            	AppendTokenQueue(&queue2,token);
+            	break;
+            case VAR:
+            	AppendTokenQueue(&queue2,token);
+            	break;
+            case EQUAL:
             case ADD:
             case SUB:
             case MUL:
             case DIV:
             case MOD:
+            case POW:
                 while (!IsEmptyTokenStack(&operation) &&
                        (TokenPrecedence(token) <= TokenPrecedence(PeekTokenStack(&operation))))
                        {
@@ -65,35 +122,3 @@ TokenQueue queue2=CreateTokenQueue();
 
 return queue2;}
 
-/*int main() {
-    TokenQueue queue = CreateTokenQueue();
-    
-    
-    Token token  = {LEFT_PAREN, 0};
-    Token token1 = {NUMBER, 5};
-    Token token2 = {ADD, 0};
-    Token token3 = {NUMBER, 3};
-    Token token4 = {MUL, 0};
-    Token token5 = {NUMBER, 2};
-    Token token6 = {RIGHT_PAREN, 0};
-    Token token7 = {MOD, 0};
-    Token token8 = {NUMBER, 4};
-    //exemple: (5+3*2)%4
-    
-AppendTokenQueue(&queue, token);
-    AppendTokenQueue(&queue, token1);
-    AppendTokenQueue(&queue, token2);
-    AppendTokenQueue(&queue, token3);
-    AppendTokenQueue(&queue, token4);
-    AppendTokenQueue(&queue, token5);
-    AppendTokenQueue(&queue, token6);
-    AppendTokenQueue(&queue, token7);
-    AppendTokenQueue(&queue, token8);
-    
-    TokenQueue queue2=syntax_analysis(&queue);
-    printf(" Queue2: ");
-    PrintTokenQueue(&queue2);
-    // resultat: 532*+4%, exact après vérification
-
-    return 0;
-}*/
